@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Title": "Current Political Issues",
+    "Content": "Discussion on the current political landscape.",
+    "Thread": "Politics",
+    "CreatedAt": "2024-09-01T10:00:00",
+    "Replies": []
+  },
+  {
+    "Id": 2,
+    "Title": "Understanding Different Religions",
+    "Content": "An exploration of various world religions.",
+    "Thread": "Religion",
+    "CreatedAt": "2024-09-05T12:30:00",
+    "Replies": []
+  },
+  {
+    "Id": 7,
+    "Title": "ASP.NET CORE 8",
+    "Content": "https://www.youtube.com/watch?v=4IgC2Q5-yDE&t=4s",
+    "Thread": "Programming",
+    "CreatedAt": "2024-09-27T01:07:14.675405+01:00",
+    "Replies": []
+  }
+]

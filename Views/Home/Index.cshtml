@@ -1,0 +1,131 @@
+﻿@model List<SimpleDotNetForum.Models.Post>
+
+    <title>Forum</title>
+
+<style>
+    /* Basic styling for menu */
+    .menu-bar {
+        background-color: #333;
+        overflow: hidden;
+        padding: 10px;
+    }
+
+        .menu-bar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+            .menu-bar a:hover {
+                background-color: #575757;
+            }
+
+            .menu-bar a.active {
+                background-color: #4CAF50;
+            }
+
+    .content {
+        margin: 20px;
+    }
+
+    .topic-list {
+        margin-top: 20px;
+        display: flex; /* Use flexbox to align items in a row */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center all items horizontally */
+    }
+
+    .topic-item {
+        display: flex; /* Align the link and the date horizontally */
+        align-items: center; /* Center the link and date vertically */
+        justify-content: center; /* Center all content horizontally */
+        padding: 10px 0; /* Padding for top and bottom */
+        flex-direction: column; /* Stack items vertically */
+        width: 100%; /* Optional: make each item full width */
+    }
+
+    .topic-link {
+        text-decoration: none;
+        font-weight: bold;
+        color: #007bff; /* Bootstrap link color */
+        text-align: center; /* Center text within the link */
+        display: inline-block; /* Allow width to be set */
+        margin-bottom: 5px; /* Space between the link and the date */
+    }
+
+    .post-meta {
+        color: #777;
+        font-size: 12px;
+        margin-left: 5px; /* Space between the link and the date */
+    }
+
+    .separator {
+        width: 100%; /* Full width for the line */
+        height: 1px; /* Height of the line */
+        background-color: #ccc; /* Color of the line */
+        margin: 5px auto; /* Center the separator */
+        max-width: 200px; /* Adjust this to match the text link width */
+    }
+
+    .create-post-link {
+        margin-top: 20px;
+        display: block;
+        color: #4CAF50;
+        text-decoration: none;
+        text-align: center; /* Center the create post link */
+    }
+
+        .create-post-link:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<!-- Displaying the Posts for the Selected Section -->
+<div class="content">
+    <h1 style="text-align: center;">Hot Topics: @(ViewBag.SelectedThread)</h1>
+
+    <!-- Create New Post Link for Each Section -->
+    <div>
+        @if (ViewBag.SelectedThread == "Politics")
+        {
+            <a class="create-post-link" href="@Url.Action("Create", "Home", new { thread = "Politics" })">Create New Post in Politics</a>
+        }
+        else if (ViewBag.SelectedThread == "Religion")
+        {
+            <a class="create-post-link" href="@Url.Action("Create", "Home", new { thread = "Religion" })">Create New Post in Religion</a>
+        }
+        else if (ViewBag.SelectedThread == "Programming")
+        {
+            <a class="create-post-link" href="@Url.Action("Create", "Home", new { thread = "Programming" })">Create New Post in Programming</a>
+        }
+    </div>
+
+        @if (Model.Count == 0)
+        {
+            <p>No posts available for this section.</p>
+        }
+        else
+        {
+        <div class="topic-list">
+            @foreach (var post in Model)
+            {
+                <div class="topic-item">
+                    @if(ViewBag.SelectedThread == null)
+                    {
+                        <a class="topic-link" href="@Url.Action("Details", "Home", new { id = post.Id, thread = ViewBag.SelectedThread })">@post.Title</a>
+                    }
+                    else
+                    {
+                        <a class="topic-link" href="@Url.Action("Details", "Home", new { id = post.Id, thread = ViewBag.SelectedThread })">@post.Title: @post.CreatedAt.ToString("dd-MM-yyyy HH:mm")</a>
+                    }
+                </div>
+                <div class="separator" style="width: calc(100% - 20px);"></div> <!-- Separator line -->
+            }
+        </div>
+
+        }
+    </div>
+

@@ -1,0 +1,61 @@
+﻿@model SimpleDotNetForum.Models.Post
+
+<!DOCTYPE html>
+
+<title>Create Post</title>
+
+<style>
+    .detail-content {
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box; /* Ensure padding does not affect the width */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="detail-content">
+    <h1>Create a New Post in @ViewBag.Thread</h1>
+
+    <form asp-action="Create" method="post">
+        <div>
+            <label>Title</label>
+            <input asp-for="Title" required maxlength="100" />
+            <span asp-validation-for="Title" class="text-danger"></span> <!-- Validation message for Title -->
+        </div>
+        <div>
+            <label>Content</label>
+            <textarea asp-for="Content" required maxlength="500" id="contentInput" style="height:250px" ;></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span> <!-- Validation message for Content -->
+        </div>
+        <div>
+            <label>Thread</label>
+            <select asp-for="Thread" asp-items="ViewBag.Threads"></select>
+            <span asp-validation-for="Thread" class="text-danger"></span> <!-- Validation message for Thread -->
+        </div>
+        <button type="submit">Create Post</button>
+    </form>
+</div>
+

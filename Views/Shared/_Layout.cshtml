@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/styles.css" asp-append-version="true" />
+
+    <style>
+        /* Ensure full height for html and body */
+        html, body {
+            height: 100%; /* Full height for the entire page */
+            margin: 0; /* Remove default margin */
+            display: flex; /* Use flexbox layout */
+            flex-direction: column; /* Stack elements vertically */
+        }
+
+        .container {
+            flex: 1; /* Allow the container to expand to fill space */
+        }
+
+        /* Basic styling for menu */
+        .menu-bar {
+            display: flex; /* Use flexbox for layout */
+            justify-content: center; /* Center the menu items */
+            background-color: #333;
+            padding: 10px;
+        }
+
+            .menu-bar a {
+                display: inline-block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                margin: 0 10px; /* Add horizontal margin for spacing between links */
+            }
+
+                .menu-bar a:hover {
+                    background-color: #575757;
+                }
+
+                .menu-bar a.active {
+                    background-color: #4CAF50;
+                }
+
+        footer {
+            background-color: #f8f9fa; /* Light background for the footer */
+            padding: 10px 0; /* Padding for footer */
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Bar -->
+    <div class="menu-bar">
+        <a href="@Url.Action("Index", "Home")" class="@(ViewBag.SelectedThread == null ? "active" : "")">Simple DotNet Forum (SDF)</a>
+        <a href="@Url.Action("Index", "Home", new { thread = "Politics" })" class="@(ViewBag.SelectedThread == "Politics" ? "active" : "")">Politics</a>
+        <a href="@Url.Action("Index", "Home", new { thread = "Religion" })" class="@(ViewBag.SelectedThread == "Religion" ? "active" : "")">Religion</a>
+        <a href="@Url.Action("Index", "Home", new { thread = "Programming" })" class="@(ViewBag.SelectedThread == "Programming" ? "active" : "")">Programming</a>
+    </div>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
